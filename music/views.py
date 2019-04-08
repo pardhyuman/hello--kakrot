@@ -11,7 +11,7 @@ IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 
 def create_album(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_authenticated():
         return render(request, 'music/login.html')
     else:
         form = AlbumForm(request.POST or None, request.FILES or None)
