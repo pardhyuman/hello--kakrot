@@ -1,0 +1,85 @@
+
+{% block title %}{{ Playlist }}{% endblock %}
+{% block playlist_active %}active{% endblock %}
+{% block body %}
+<p style="color:black;">DETAIL123.HTML RUNNING</p>
+<div class="container-fluid songs-container">
+{%include 'music/base2.html'%}
+    <div class="row">
+
+        
+
+        <!-- write Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Playlist of {{user.username}}</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                  {% if playlists %}    
+                    <table class="table">
+					<style type="text/css">
+					td{padding:22px 45px 22px 22px}
+					</style>
+					 
+                        <thead>
+                        <tr>
+						    <th>Album Title</th>
+                            <th>Titles</th>
+                            <th>Audio File</th>
+						
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for playlist in playlists %}
+						  {% with cwd|add:'music'  as name%}
+						  {%with playlist.audio_file as path %}
+						  {%with name|add:path as addressfile %}
+						    {%ifequal playlist.atitle "PALACE"%}
+							 {%ifnotequal playlist.song_title 'RANDOMSONG'%}
+                            <tr>
+							    <td>{{playlist.atitle}}</td> 
+                                <td>{{ playlist.song_title }}</td>
+							
+                                <td>
+                                    <a  href="{{ addressfile}}" alt="{{ song.audio_file.url }}">
+                                        <button type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+							  {%endifnotequal %}  
+							{% endifequal %} 
+							{% endwith %}
+							{% endwith %}
+							{% endwith %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                  {% else %}
+            
+                  {% endif %} 
+				  
+				  
+                </div>
+				
+            </div>
+
+        </div>
+
+    </div>
+
+	
+</div>
+
+
+{% endblock %}

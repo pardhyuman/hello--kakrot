@@ -8,6 +8,8 @@ SECRET_KEY = 'rha7*we-io_dbhnf$k)%wum_i=-fct9+n^j+@5j9p*$z01lzj1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+MEDIA_ROOT=os.path.join(BASE_DIR,"songdir")
+MEDIA_URL="/media"
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -23,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
 'django.middleware.security.SecurityMiddleware',
 'django.contrib.sessions.middleware.SessionMiddleware',
 'django.middleware.common.CommonMiddleware',
@@ -46,6 +48,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+				'django.template.context_processors.media' ,
             ],
         },
     },

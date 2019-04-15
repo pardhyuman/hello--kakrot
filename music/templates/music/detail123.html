@@ -1,0 +1,108 @@
+{% extends 'music/base1.html' %}
+{% block title %}{{ album }}{% endblock %}
+{% block albums_active %}active{% endblock %}
+
+{% block body %}
+<p style="color:white;">DETAIL123.HTML RUNNING</p>
+<div class="container-fluid songs-container">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'music:detail123' album.id %}">
+                        {% if album.album_logo %}
+						    <script>
+							a=10;
+							b=10;
+							</script>
+                              							
+                            <img src="{{ album.album_logo.url }}" alt ="{{ album.album_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                   <p style="padding:0 5px 5px 0";"font-size:500%";>Album :</p>
+							<h5>{{ album.album_title }}</h5>
+							<p style="padding:0 5px 5px 0";"font-size:500%";>Singer :<p>
+                            <h4>{{ album.artist }}</h4>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- write Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="{% url 'music:detail123' album.id %}">View All</a></li>
+                
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Songs</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+					<style type="text/css">
+					td{padding:22px 45px 22px 22px}
+					</style>
+                        <thead>
+                        <tr>
+                            <th>Titles</th>
+                            <th>Audio File</th>
+                            <th>Add to favorite</th>
+							
+                        
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for song in album.song_set.all %}
+                            <tr>
+                                <td>{{ song.song_title }}</td>
+							
+                                <td>
+                                    <a target="_blank" href="{{ song.audio_file.url }}" alt="{{ song.audio_file.url }}">
+                                        <button type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                        </button>
+                                    </a>
+                                </td>
+                                <td>
+								<div>
+								<form action="{% url 'music:addit'%}" method="post">
+								<input id="title" name="title" type="hidden"class= "query-title" placeholder="Title..." value={{song.song_title}}>
+								<input id="search" name="search" type="hidden"class= "query-search" placeholder="Search..." value={{song.audio_file.url}}>
+							    <input class ="btn btn-primary" type="submit" value="submit">
+								<form>
+								</div>
+                                   </td>
+                                <td>
+                                    <form action="{% url 'music:delete_song' album.id song.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="song_id" value="{{ song.id }}" />
+                          
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

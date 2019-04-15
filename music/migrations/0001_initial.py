@@ -33,4 +33,22 @@ class Migration(migrations.Migration):
                 ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='music.Album')),
             ],
         ),
+		
+		
+		
+		 migrations.CreateModel(
+            name='Playlist',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('atit', models.CharField(default='PALACE', max_length=250)),
+                ('song_title', models.CharField(default='SONG', max_length=250)),
+                ('audio_file', models.CharField(default='FILE', max_length=550)),
+                ('is_favorite', models.BooleanField(default=True)),
+                ('user', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE,to='music.Playlist')),
+            ],
+        ),
+		
+		
+		
+		
     ]
