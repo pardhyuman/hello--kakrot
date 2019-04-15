@@ -211,6 +211,7 @@ def login_user(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
+                user.backend='django.contrib.auth.backends.ModelBackend'
                 login(request, user)
                 albums = Album.objects.filter(user=request.user)
                 return render(request, 'music/index.html', {'albums': albums})
@@ -237,6 +238,7 @@ def login_again(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
+                user.backend='django.contrib.auth.backends.ModelBackend'
                 login(request, user)
                 albums = Album.objects.filter(user=request.user)
                 return render(request, 'music/index.html', {'albums': albums})
@@ -282,6 +284,7 @@ def addit(request):###when you click on submit in add to favourite of our collec
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
+                user.backend='django.contrib.auth.backends.ModelBackend'
                 login(request, user)
                 print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
                 infile=open('arc1','rb');
@@ -343,6 +346,7 @@ def login_user123(request):
         username = 'SongPalace'
         password = 'songpalace123'
         user = authenticate(username='SongPalace', password='songpalace123')
+        user.backend='django.contrib.auth.backends.ModelBackend'
         login(request, user);
         albums = Album.objects.filter(user=request.user);
         #render(request, 'music/songs.html', {'albums': albums})
@@ -403,6 +407,7 @@ def register(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
+                user.backend='django.contrib.auth.backends.ModelBackend'
                 login(request, user)
                 albums = Album.objects.filter(user=request.user)
 				
