@@ -344,8 +344,8 @@ def addsong(request):
 					
 def login_user123(request):
         username = 'SongPalace'
-        password = 'songpalace123'
-        user = authenticate(username='SongPalace', password='songpalace123')
+        password = 'amitshar27'
+        user = authenticate(username='SongPalace', password='amitshar27')
         user.backend='django.contrib.auth.backends.ModelBackend'
         login(request, user);
         albums = Album.objects.filter(user=request.user);
